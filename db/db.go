@@ -17,4 +17,5 @@ func DoThing1() {
 func DoThing2(listings []models.Listing) {
 	logging.Info("Doing thing 2")
 	db.Exec("...")
+	DoThing1()
 }
