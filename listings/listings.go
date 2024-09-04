@@ -25,9 +25,19 @@ func (mls *multiListingsService) GetListings() []models.Listing {
 		ret = append(ret, service.GetListings()...)
 	}
 
+	for _, listing := range ret {
+		if shouldBuy(listing) {
+			listing.Buy()
+		}
+	}
+
 	return ret
 }
 
 type ListingsService interface {
 	GetListings() []models.Listing
+}
+
+func shouldBuy(_ models.Listing) bool {
+	return true
 }
