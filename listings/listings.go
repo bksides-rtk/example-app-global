@@ -7,6 +7,14 @@ import (
 	"github.com/rtk-tickets/example-app-global/models"
 )
 
+var DefaultListingsService = multiListingsService{
+	marketplaceSvcs: []ListingsService{
+		&seatgeek.SeatGeekListingsService{},
+		&ticketmaster.TicketmasterListingsService{},
+		&gametime.GameTimeListingsService{},
+	},
+}
+
 type multiListingsService struct {
 	marketplaceSvcs []ListingsService
 }
@@ -22,14 +30,4 @@ func (mls *multiListingsService) GetListings() []models.Listing {
 
 type ListingsService interface {
 	GetListings() []models.Listing
-}
-
-func InitListingsService() ListingsService {
-	return &multiListingsService{
-		marketplaceSvcs: []ListingsService{
-			&seatgeek.SeatGeekListingsService{},
-			&ticketmaster.TicketmasterListingsService{},
-			&gametime.GameTimeListingsService{},
-		},
-	}
 }
