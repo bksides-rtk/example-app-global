@@ -12,6 +12,11 @@ type DBService struct {
 	db             DbIface
 }
 
+func (dbs *DBService) WithDB(db DbIface) *DBService {
+	dbs.db = db
+	return dbs
+}
+
 var DefaultDBService = DBService{
 	loggingService: logging.DefaultLoggingService,
 	db:             &sql.DB{},
@@ -28,5 +33,18 @@ func (dbs *DBService) DoThing1() {
 
 func (dbs *DBService) DoThing2(listings []models.Listing) {
 	dbs.loggingService.Info("Doing thing 2")
-	dbs.db.Exec("...")
+
+	var newDbService = dbs
+
+	switch db := dbs.db.(type) {
+	case *sql.DB:
+		tx, err := db.Begin()
+		if err != nil {
+			return
+		}
+		newDbService = dbs.WithDB(tx)
+	}
+
+	newDbService.db.Exec("...")
+	newDbService.DoThing1()
 }
