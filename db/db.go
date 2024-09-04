@@ -17,5 +17,16 @@ func DoThing1() {
 func DoThing2(listings []models.Listing) {
 	logging.Info("Doing thing 2")
 	db.Exec("...")
-	DoThing1()
+	DoThing1InTransaction()
+}
+
+func DoThing1InTransaction() {
+	tx, err := db.Begin()
+	if err != nil {
+		return
+	}
+
+	logging.Info("Doing thing 1 in transaction")
+	tx.Exec("...")
+	tx.Commit()
 }
