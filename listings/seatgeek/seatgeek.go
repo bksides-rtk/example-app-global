@@ -6,6 +6,12 @@ type SeatGeekListingsService struct{}
 
 func (sgls *SeatGeekListingsService) GetListings() []models.Listing {
 	return []models.Listing{
-		{},
+		{
+			Buy: sgls.Buy,
+		},
 	}
+}
+
+func (sgls *SeatGeekListingsService) Buy() {
+	// do something
 }
