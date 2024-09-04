@@ -6,6 +6,10 @@ type LoggingService struct {
 	logger Logger
 }
 
+var DefaultLoggingService = LoggingService{
+	logger: &logger{},
+}
+
 type logger struct{}
 
 func (l *logger) Infof(format string, args ...interface{}) {
@@ -18,10 +22,4 @@ type Logger interface {
 
 func (ls *LoggingService) Info(format string) {
 	ls.logger.Infof(format)
-}
-
-func InitLoggingService() LoggingService {
-	return LoggingService{
-		logger: &logger{},
-	}
 }

@@ -11,6 +11,11 @@ type DBService struct {
 	db             DbIface
 }
 
+var DefaultDBService = DBService{
+	loggingService: logging.DefaultLoggingService,
+	db:             &sql.DB{},
+}
+
 type DbIface interface {
 	Exec(string, ...any) (sql.Result, error)
 }
@@ -23,11 +28,4 @@ func (dbs *DBService) DoThing1() {
 func (dbs *DBService) DoThing2() {
 	dbs.loggingService.Info("Doing thing 2")
 	dbs.db.Exec("...")
-}
-
-func InitDBService(loggingService logging.LoggingService) DBService {
-	return DBService{
-		loggingService: loggingService,
-		db:             &sql.DB{},
-	}
 }
