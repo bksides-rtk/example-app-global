@@ -2,6 +2,10 @@ package logging
 
 import "fmt"
 
+type LoggingService struct {
+	logger Logger
+}
+
 type logger struct{}
 
 func (l *logger) Infof(format string, args ...interface{}) {
@@ -12,10 +16,12 @@ type Logger interface {
 	Infof(format string, args ...interface{})
 }
 
-func Info(logger Logger, format string) {
-	logger.Infof(format)
+func (ls *LoggingService) Info(format string) {
+	ls.logger.Infof(format)
 }
 
-func InitLogger() Logger {
-	return &logger{}
+func InitLoggingService() LoggingService {
+	return LoggingService{
+		logger: &logger{},
+	}
 }

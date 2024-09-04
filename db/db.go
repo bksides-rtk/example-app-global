@@ -1,19 +1,33 @@
 package db
 
-import "database/sql"
+import (
+	"database/sql"
+
+	"github.com/rtk-tickets/example-app-global/logging"
+)
+
+type DBService struct {
+	loggingService logging.LoggingService
+	db             DbIface
+}
 
 type DbIface interface {
 	Exec(string, ...any) (sql.Result, error)
 }
 
-func DoThing1(db DbIface) {
-	db.Exec("...")
+func (dbs *DBService) DoThing1() {
+	dbs.loggingService.Info("Doing thing 1")
+	dbs.db.Exec("...")
 }
 
-func DoThing2(db DbIface) {
-	db.Exec("...")
+func (dbs *DBService) DoThing2() {
+	dbs.loggingService.Info("Doing thing 2")
+	dbs.db.Exec("...")
 }
 
-func InitDB() DbIface {
-	return &sql.DB{}
+func InitDBService(loggingService logging.LoggingService) DBService {
+	return DBService{
+		loggingService: loggingService,
+		db:             &sql.DB{},
+	}
 }
