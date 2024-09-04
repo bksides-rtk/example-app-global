@@ -1,21 +1,24 @@
 package main
 
 import (
-	"github.com/rtk-tickets/example-app-global/db"
+	dbPkg "github.com/rtk-tickets/example-app-global/db"
 	"github.com/rtk-tickets/example-app-global/logging"
 )
 
 func main() {
-	doThing1()
-	doThing2()
+	db := dbPkg.InitDB()
+	logger := logging.InitLogger()
+
+	doThing1(db, logger)
+	doThing2(db, logger)
 }
 
-func doThing1() {
-	logging.Logger.Infof("doing thing 1")
-	db.DoThing1()
+func doThing1(db dbPkg.DbIface, logger logging.Logger) {
+	logging.Info(logger, "doing thing 1")
+	dbPkg.DoThing1(db)
 }
 
-func doThing2() {
-	logging.Logger.Infof("doing thing 2")
-	db.DoThing2()
+func doThing2(db dbPkg.DbIface, logger logging.Logger) {
+	logging.Info(logger, "doing thing 2")
+	dbPkg.DoThing2(db)
 }

@@ -2,16 +2,18 @@ package db
 
 import "database/sql"
 
-type dbIface interface {
-	Exec(string) (sql.Result, error)
+type DbIface interface {
+	Exec(string, ...any) (sql.Result, error)
 }
 
-var Db dbIface
-
-func DoThing1() {
-	Db.Exec("...")
+func DoThing1(db DbIface) {
+	db.Exec("...")
 }
 
-func DoThing2() {
-	Db.Exec("...")
+func DoThing2(db DbIface) {
+	db.Exec("...")
+}
+
+func InitDB() DbIface {
+	return &sql.DB{}
 }
