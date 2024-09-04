@@ -1,3 +1,6 @@
 package models
 
-type Listing struct{}
+type Listing struct {
+	MarketplaceID string
+	Marketplace   string
+}
