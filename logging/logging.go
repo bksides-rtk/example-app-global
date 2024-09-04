@@ -11,6 +11,6 @@ type logger struct {
 	Out *os.File
 }
 
-func Infof(format string, args ...interface{}) {
-	fmt.Fprintf(Logger.Out, format, args...)
+func Info(format string) {
+	fmt.Fprint(Logger.Out, format)
 }
