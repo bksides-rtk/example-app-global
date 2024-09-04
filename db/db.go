@@ -4,6 +4,7 @@ import (
 	"database/sql"
 
 	"github.com/rtk-tickets/example-app-global/logging"
+	"github.com/rtk-tickets/example-app-global/models"
 )
 
 type DBService struct {
@@ -20,7 +21,7 @@ func (dbs *DBService) DoThing1() {
 	dbs.db.Exec("...")
 }
 
-func (dbs *DBService) DoThing2() {
+func (dbs *DBService) DoThing2(listings []models.Listing) {
 	dbs.loggingService.Info("Doing thing 2")
 	dbs.db.Exec("...")
 }
