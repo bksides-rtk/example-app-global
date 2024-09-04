@@ -11,11 +11,11 @@ func main() {
 }
 
 func doThing1() {
-	logging.Infof("doing thing 1")
+	logging.Logger.Infof("doing thing 1")
 	db.DoThing1()
 }
 
 func doThing2() {
-	logging.Infof("doing thing 2")
+	logging.Logger.Infof("doing thing 2")
 	db.DoThing2()
 }

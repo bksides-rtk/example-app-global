@@ -2,7 +2,11 @@ package db
 
 import "database/sql"
 
-var Db *sql.DB
+type dbIface interface {
+	Exec(string) (sql.Result, error)
+}
+
+var Db dbIface
 
 func DoThing1() {
 	Db.Exec("...")
