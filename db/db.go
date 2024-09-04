@@ -2,12 +2,12 @@ package db
 
 import "database/sql"
 
-var db *sql.DB
+var Db *sql.DB
 
 func DoThing1() {
-	db.Exec("...")
+	Db.Exec("...")
 }
 
 func DoThing2() {
-	db.Exec("...")
+	Db.Exec("...")
 }
