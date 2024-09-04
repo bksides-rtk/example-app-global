@@ -4,6 +4,7 @@ import (
 	"database/sql"
 
 	"github.com/rtk-tickets/example-app-global/logging"
+	"github.com/rtk-tickets/example-app-global/models"
 )
 
 type DbIface interface {
@@ -15,7 +16,7 @@ func DoThing1(logger logging.Logger, db DbIface) {
 	db.Exec("...")
 }
 
-func DoThing2(logger logging.Logger, db DbIface) {
+func DoThing2(logger logging.Logger, db DbIface, listings []models.Listing) {
 	logging.Info(logger, "Doing thing 2")
 	db.Exec("...")
 }
