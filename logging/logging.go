@@ -1,5 +1,7 @@
 package logging
 
-func Infof(format string, args ...interface{}) {
-	// no-op
+import "fmt"
+
+func Info(format string, args ...interface{}) {
+	fmt.Printf(format+"\n", args...)
 }
