@@ -2,7 +2,9 @@ package seatgeek
 
 import "github.com/rtk-tickets/example-app-global/models"
 
-func GetListingsSeatgeek() []models.Listing {
+type SeatgeekListingsService struct{}
+
+func (sgls *SeatgeekListingsService) GetListings() []models.Listing {
 	return []models.Listing{
 		{},
 	}
