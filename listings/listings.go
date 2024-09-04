@@ -7,12 +7,29 @@ import (
 	"github.com/rtk-tickets/example-app-global/models"
 )
 
-func GetListings() []models.Listing {
-	ret := gametime.GetListingsGametime()
+type multiListingsService struct {
+	marketplaceSvcs []ListingsService
+}
 
-	ret = append(ret, seatgeek.GetListingsSeatgeek()...)
-
-	ret = append(ret, ticketmaster.GetListingsTicketmaster()...)
+func (mls *multiListingsService) GetListings() []models.Listing {
+	ret := []models.Listing{}
+	for _, service := range mls.marketplaceSvcs {
+		ret = append(ret, service.GetListings()...)
+	}
 
 	return ret
+}
+
+type ListingsService interface {
+	GetListings() []models.Listing
+}
+
+func InitListingsService() ListingsService {
+	return &multiListingsService{
+		marketplaceSvcs: []ListingsService{
+			&seatgeek.SeatGeekListingsService{},
+			&ticketmaster.TicketmasterListingsService{},
+			&gametime.GameTimeListingsService{},
+		},
+	}
 }

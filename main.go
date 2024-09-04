@@ -8,7 +8,7 @@ import (
 func main() {
 	db.DefaultDBService.DoThing1()
 
-	listings := listings.GetListings()
+	listings := listings.DefaultListingsService.GetListings()
 
 	db.DefaultDBService.DoThing2(listings)
 }

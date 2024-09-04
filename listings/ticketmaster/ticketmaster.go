@@ -2,7 +2,9 @@ package ticketmaster
 
 import "github.com/rtk-tickets/example-app-global/models"
 
-func GetListingsTicketmaster() []models.Listing {
+type TicketmasterListingsService struct{}
+
+func (tmls *TicketmasterListingsService) GetListings() []models.Listing {
 	return []models.Listing{
 		{},
 	}
