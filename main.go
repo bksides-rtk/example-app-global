@@ -9,16 +9,9 @@ func main() {
 	db := dbPkg.InitDB()
 	logger := logging.InitLogger()
 
-	doThing1(db, logger)
-	doThing2(db, logger)
-}
+	dbPkg.DoThing1(logger, db)
 
-func doThing1(db dbPkg.DbIface, logger logging.Logger) {
-	logging.Info(logger, "doing thing 1")
-	dbPkg.DoThing1(db)
-}
+	listings := listings.GetListings()
 
-func doThing2(db dbPkg.DbIface, logger logging.Logger) {
-	logging.Info(logger, "doing thing 2")
-	dbPkg.DoThing2(db)
+	dbPkg.DoThing2(logger, db, listings)
 }
