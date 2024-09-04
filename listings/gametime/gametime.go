@@ -2,7 +2,9 @@ package gametime
 
 import "github.com/rtk-tickets/example-app-global/models"
 
-func GetListingsGametime() []models.Listing {
+type GameTimeListingsService struct{}
+
+func (gtls *GameTimeListingsService) GetListings() []models.Listing {
 	return []models.Listing{
 		{},
 	}
