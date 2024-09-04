@@ -1,18 +1,18 @@
 package listings
 
 import (
-	"github.com/rtk-tickets/example-app-global/listings/gametime"
-	"github.com/rtk-tickets/example-app-global/listings/seatgeek"
-	"github.com/rtk-tickets/example-app-global/listings/ticketmaster"
 	"github.com/rtk-tickets/example-app-global/models"
 )
 
-func GetListings() []models.Listing {
-	ret := gametime.GetListingsGametime()
+type ListingsService interface {
+	GetListings() []models.Listing
+}
 
-	ret = append(ret, seatgeek.GetListingsSeatgeek()...)
-
-	ret = append(ret, ticketmaster.GetListingsTicketmaster()...)
+func GetListings(listingsServices []ListingsService) []models.Listing {
+	ret := []models.Listing{}
+	for _, service := range listingsServices {
+		ret = append(ret, service.GetListings()...)
+	}
 
 	return ret
 }
